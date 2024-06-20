@@ -1,6 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-class ToDoTaskAdd extends React.Component {
+class ToDoTaskAddInner extends React.Component {
 	constructor(props){
 		super(props)
 		
@@ -47,6 +48,7 @@ class ToDoTaskAdd extends React.Component {
 			return res.json();
 		}).then((data) => {
 			this.props.onTaskAdd(data);
+			this.props.history('/');
 		});
 	}
 	
@@ -60,6 +62,12 @@ class ToDoTaskAdd extends React.Component {
 		)
 	}
 
+}
+
+const ToDoTaskAdd = (props) => {
+	return(
+	    <ToDoTaskAddInner {...props} history={useNavigate()}/>
+	)
 }
 
 export default ToDoTaskAdd;
