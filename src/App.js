@@ -1,60 +1,39 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import ToDoList from './ToDoList';
-import ToDoTaskAdd from './ToDoTaskAdd';
+import MyLibraryList from './MyLibraryList';
+import MyLibraryAdd from './MyLibraryAdd';
+import { mylibraryAddAll } from './actions';
 
 class App extends React.Component {
 	
-    constructor(props){
-		super(props);
-		
-		this.state = {
-			tasks: []
-		}
-		
-		this.onTaskDelete = this.onTaskDelete.bind(this);
-		this.onTaskAdd = this.onTaskAdd.bind(this);
-	}
-	
 	componentDidMount(){
-		fetch('tasks').then(function(res){
+		fetch('books').then(function(res){
 			return res.json();
 		}).then((data) => {
-			this.setState({
-				tasks: data
-			});
-		});
-	}
-	
-	onTaskAdd(task){
-		this.setState({
-			tasks: [...this.state.tasks, task]
-		});
-	}
-	
-	onTaskDelete(_id){
-		this.setState({
-			tasks: this.state.tasks.filter(function(task){
-				return task._id !== _id;
-			})
+			this.props.dispatch(mylibraryAddAll(data));
 		});
 	}
 	
 	render(){
 		
 	    return (
-            <div className="App">
-			    <Router>
-				    <Routes>
-					    <Route path="/" element={<ToDoList tasks={this.state.tasks} onTaskDelete={this.onTaskDelete}/>}/>
-						<Route path="/add" element={<ToDoTaskAdd onTaskAdd={this.onTaskAdd}/>}/>
-					</Routes>
-				</Router>
-            </div>
+		    <div className="row d-flex justify-content-crnter container">
+				<div className="col-md-8">
+					<Provider store={this.props.store}>
+						<Router>
+							<Routes>
+								<Route path="/" element={<MyLibraryList />}/>
+								<Route path="/add" element={<MyLibraryAdd />}/>
+							</Routes>
+						</Router>
+					</Provider>
+				</div>
+			</div>
         );
 	}
 
 }
 
-export default App;
+export default connect()(App);
