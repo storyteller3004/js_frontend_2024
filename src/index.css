@@ -139,7 +139,7 @@ i {
 	margin-left: 25px;
 }
 .badge{
-	font-weight:normal;
+	font-weight: normal;
 }
 .btn:not(:disabled):not(.disabled) {
     cursor: pointer;

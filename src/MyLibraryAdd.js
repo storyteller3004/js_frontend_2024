@@ -77,9 +77,9 @@ class MyLibraryAddInner extends React.Component {
 				<form onSubmit={this.onAddFormSubmit}>
 				<div className="widget-content">
 					<div className="widget-content-wrapper ml-2">
-						<div className="space"><input type="text" value={this.state.title} onChange={this.ontitleChange} placeholder="Название" /></div>
-						<div className="space"><input type="text" value={this.state.author} onChange={this.onauthorChange} placeholder="Автор" /></div>
-						<div className="space"><input type="text" value={this.state.genre} onChange={this.ongenreChange} placeholder="Жанр" /></div>
+						<div className="space"><input type="text" value={this.state.title} onChange={this.ontitleChange} placeholder="Название" className="form-control"/></div>
+						<div className="space"><input type="text" type="text" value={this.state.author} onChange={this.onauthorChange} placeholder="Автор" className="form-control"/></div>
+						<div className="space"><input type="text" value={this.state.genre} onChange={this.ongenreChange} placeholder="Жанр" className="form-control" /></div>
 						<div className="space"><input type="submit" value="Добавить" className="btn btn-primary"/></div>
 					</div>
 				</div>
@@ -101,3 +101,4 @@ const MyLibraryAdd = (props) => {
 }
 
 export default connect() (MyLibraryAdd);
+
